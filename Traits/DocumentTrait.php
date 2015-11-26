@@ -6,7 +6,6 @@
 namespace SuperCru\ExtendedCmsBundle\Traits;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
-use GAM\CmsBundle\Document\Page;
 use Symfony\Cmf\Bundle\SeoBundle\Doctrine\Phpcr\SeoMetadata;
 
 /**
@@ -118,7 +117,7 @@ trait DocumentTrait
     /**
      * Get the value of The parent document
      *
-     * @return Page
+     * @return self
      */
     public function getParent()
     {

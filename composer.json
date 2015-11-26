@@ -1,0 +1,30 @@
+{
+    "name": "supercru/extendedcmsbundle",
+    "type": "symfony-bundle",
+    "description": "Symfony2 Bundle that enhances the functionalatly of the Symfony CMF",
+    "keywords": ["SuperCru", "cmf", "cms"],
+    "homepage": "http://github.com/SuperCru/ExtendedCmsBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kaelin Jacobson",
+            "email": "kaelin@supercru.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "symfony-cmf/media-bundle": "^1.2",
+        "symfony-cmf/block-bundle": "^1.2",
+        "symfony-cmf/menu-bundle": "^1.2",
+        "symfony/form": "2.*,>=2.6",
+        "helios-ag/fm-elfinder-bundle": "^5.0",
+        "symfony-cmf/seo-bundle": "^1.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "SuperCru\\ExtendedCmsBundle": ""
+        }
+    },
+    "minimum-stability": "stable",
+    "target-dir": "SuperCru/ExtendedCmsBundle"
+}
