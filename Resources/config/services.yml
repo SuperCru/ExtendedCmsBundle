@@ -1,0 +1,26 @@
+services:
+    supercru_extendedcms.elfinder_id.form.type:
+        class: GAM\CmsBundle\Form\Type\ElFinderIdType
+        arguments:
+            - @doctrine_phpcr.odm.document_manager
+        tags:
+            - { name: "form.type", alias: "elfinder_id" }
+    supercru_extendedcms.adapter.elfinder.id_phpcr_driver:
+        class: SuperCru\ExtendedCmsBundle\Adapter\ElFinder\IdPhpcrDriver
+        arguments:
+            - @doctrine_phpcr
+            - %cmf_media.persistence.phpcr.manager_name%
+            - @cmf_media.persistence.phpcr.manager
+            - @cmf_media.templating.helper
+            - %cmf_media.imagine.filter.elfinder_thumbnail%
+            
+    supercru_extendedcms.listener.menu_node:
+          class: SuperCru\ExtendedCmsBundle\Listener\MenuNodeListener
+          arguments:
+              - "@knp_menu.menu_provider"
+              - "@security.authorization_checker"
+          tags:
+              -
+                  name: kernel.event_listener
+                  event: cmf_menu.create_menu_item_from_node
+                  method: onCreateMenuItemFromNode
