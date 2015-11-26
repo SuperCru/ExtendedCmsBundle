@@ -18,7 +18,7 @@
         "symfony-cmf/menu-bundle": "^1.2",
         "symfony/form": "2.*,>=2.6",
         "helios-ag/fm-elfinder-bundle": "^5.0",
-        "symfony-cmf/seo-bundle": "^1.2"
+        "symfony-cmf/seo-bundle": "^1.1"
     },
     "autoload": {
         "psr-0": {
