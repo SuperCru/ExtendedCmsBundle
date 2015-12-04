@@ -1,0 +1,51 @@
+{% block sonata_formatter_type_widget %}
+    <div style="display: none;">
+        <div style="margin-bottom: 5px;">
+            {{ form_widget(form.children[format_field]) }}
+            {% if format_field_options.choices|length > 1 %}
+                <i>{{ "please_select_format_method"|trans({}, "SonataFormatterBundle") }}</i>
+            {% endif %}
+        </div>
+    </div>
+
+    {{ form_widget(form.children[source_field]) }}
+
+    <script>
+        var {{ source_id }}_rich_instance = false;
+
+        jQuery(document).ready(function () {
+
+            // This code requires CKEDITOR and jQuery MarkItUp
+            if (typeof CKEDITOR === 'undefined' || jQuery().markItUp == undefined) {
+                return;
+            }
+
+            jQuery('#{{ form.children[format_field].vars.id }}').parents("form").on('click', function (event) {
+                if ({{ source_id }}_rich_instance) {
+        {{ source_id }}_rich_instance.updateElement();
+                                }
+                            });
+
+                            var elms = jQuery('#{{ form.children[source_field].vars.id }}');
+                            elms.markItUpRemove();
+                            if ({{ source_id }}_rich_instance) {
+        {{ source_id }}_rich_instance.destroy();
+                        }
+
+                        var val = jQuery(this).val();
+                        var appendClass = val;
+
+        {{ source_id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
+
+                            var parent = elms.parents('div.markItUp');
+
+                            if (parent) {
+                                for (name in ['textile', 'markdown', 'bbcode', 'rawhtml', 'richhtml', 'rawhtml']) {
+                                    parent.removeClass(name)
+                                }
+
+                                parent.addClass(appendClass);
+                            }
+                        });
+    </script>
+{% endblock sonata_formatter_type_widget %}
