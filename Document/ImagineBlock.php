@@ -61,6 +61,15 @@ class ImagineBlock extends BaseImagineBlock
     }
 
     /**
+     * Gets the image
+     * @return Image
+     */
+    public function getImage()
+    {
+        return $this->imageRef;
+    }
+
+    /**
      * Updates the block name     
      */
     public function updateName()

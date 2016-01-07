@@ -44,7 +44,7 @@ class ElFinderIdType extends ElFinderType
         parent::buildForm($builder, $options);
 
         $builder->setCompound(false);
-        $builder->addModelTransformer(new ElFinderIdTransformer($this->manager));
+        $builder->addViewTransformer(new ElFinderIdTransformer($this->manager)); 
     }
 
     /**

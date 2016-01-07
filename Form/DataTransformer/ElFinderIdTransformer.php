@@ -49,7 +49,7 @@ class ElFinderIdTransformer implements DataTransformerInterface
         if ($document === null) {
             throw new TransformationFailedException(sprintf("An document with id: %s does not exist", $id));
         }
-
+        
         return $document;
     }
 
@@ -57,7 +57,7 @@ class ElFinderIdTransformer implements DataTransformerInterface
      * {@inheritdoc}
      */
     public function transform($document)
-    {
+    {        
         if ($document === null) {
             return;
         }
