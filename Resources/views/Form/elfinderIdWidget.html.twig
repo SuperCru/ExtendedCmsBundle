@@ -1,7 +1,8 @@
-{% block elfinder_image_widget %}
+{% block elfinder_id_widget %}
+    {{ dump(form.vars.data) }}
     {% if form.vars.data is null %}
         {% set url = "no-photo.jpg" %}
-    {% else %}
+    {% else %} 
         {% set url = cmf_media_display_url(form.vars.sonata_admin.value, {"imagine_filter": "selection_thumbnail"}) %}
     {% endif %}
     <img src="{{ url }}" id="{{ form.vars.id }}_image" data-type="elfinder-input-field" />
@@ -15,16 +16,16 @@
             });
 
             function setValue(value, element_id) {
-                console.log(element_id);
                 $("#" + element_id).val(value).change();
                 $.ajax({
-                    "url": Routing.generate("supercru_extendedcms_elfinderimage_thumbnail", {imageId: value}),
+                    "url": Routing.generate("supercru_extendedcms_elfinderid_thumbnail", {imageId: value}),
                     "type": "GET",
                     dataType: "json",
                     "success": function (r) {
                         $("#" + element_id + "_image").attr("src", r.url);
                     },
                 });
+                return false;
             }
         </script>
     {% endif %}

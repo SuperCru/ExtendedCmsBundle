@@ -61,14 +61,12 @@ class ImagineBlock extends BaseImagineBlock
     }
 
     /**
-     * Updates the block name
+     * Updates the block name     
      */
     public function updateName()
     {
         $this->name = $this->slugify($this->label) . "-imagine-block";
     }
-
-
 
     /**
      * Get the value of The image to link to the block
@@ -165,5 +163,4 @@ class ImagineBlock extends BaseImagineBlock
 
         return $this;
     }
-
 }

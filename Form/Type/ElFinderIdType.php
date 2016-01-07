@@ -71,4 +71,9 @@ class ElFinderIdType extends ElFinderType
     {
         return "elfinder_id";
     }
+    
+    public function getBlockPrefix()
+    {
+        return $this->getName();
+    }
 }
