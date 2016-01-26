@@ -22,7 +22,14 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('super_cru_cms_extended');
+        $rootNode = $treeBuilder->root('super_cru_extended_cms');
+        
+        $rootNode->children()
+                    ->scalarNode("site_path")
+                        ->cannotBeEmpty()
+                        ->defaultValue("/cms/content/site")
+                    ->end()
+                ->end();
 
         return $treeBuilder;
     }

@@ -1,4 +1,10 @@
 services:
+    supercru_extendedcms.twig.extension.footer:
+        class: SuperCru\ExtendedCmsBundle\Twig\FooterExtension
+        arguments: ["@doctrine_phpcr.odm.document_manager", "%supercru.extenedcms.footer.site_path%"]
+        tags:
+            - { name: "twig.extension" }
+
     supercru_extendedcms.elfinder_id.form.type:
         class: SuperCru\ExtendedCmsBundle\Form\Type\ElFinderIdType
         arguments:

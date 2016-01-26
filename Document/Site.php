@@ -32,6 +32,14 @@ class Site
     protected $homepage;
 
     /**
+     * The footer container of the site
+     * 
+     * @PHPCR\ReferenceOne(cascade={"all"})
+     * @var mixed
+     */
+    protected $footer;
+
+    /**
      * The name of the document
      * @PHPCR\Nodename()
      * @var string
@@ -146,6 +154,17 @@ class Site
     {
         $this->pages = $pages;
 
+        return $this;
+    }
+
+    public function getFooter()
+    {
+        return $this->footer;
+    }
+
+    public function setFooter($footer)
+    {
+        $this->footer = $footer;
         return $this;
     }
 }

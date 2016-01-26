@@ -28,5 +28,7 @@ class SuperCruExtendedCmsExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('supercru.extenedcms.footer.site_path', $config['site_path']);
     }
 }
