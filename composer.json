@@ -12,13 +12,7 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "symfony-cmf/media-bundle": "^1.2",
-        "symfony-cmf/block-bundle": "^1.2",
-        "symfony-cmf/menu-bundle": "^1.2 || ^2.0",
-        "symfony/form": "2.*,>=2.6",
-        "helios-ag/fm-elfinder-bundle": "^5.0",
-        "symfony-cmf/seo-bundle": "^1.1"
+        "php": ">=5.4.0"
     },
     "autoload": {
         "psr-0": {
