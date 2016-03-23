@@ -30,16 +30,23 @@ class MenuNodeListener
      * @var AuthorizationCheckerInterface
      */
     protected $security;
+    
+    /**
+     * The auth token
+     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+     */
+    private $token;
 
     /**
      * Basic constructor
      * @param MenuProviderInterface $provider
      * @param AuthorizationCheckerInterface $security
      */
-    public function __construct(MenuProviderInterface $provider, AuthorizationCheckerInterface $security)
+    public function __construct(MenuProviderInterface $provider, AuthorizationCheckerInterface $security, \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $token)
     {
         $this->provider = $provider;
         $this->security = $security;
+        $this->token = $token;
     }
 
     /**
@@ -55,6 +62,15 @@ class MenuNodeListener
         if ($node instanceof MenuNode) {
             $addRole = $node->getAddWhenGranted();
             $removeRole = $node->getRemoveWhenGranted();
+            
+            //This avoids issue when rendering error pages with menus
+            //Defaults all menu items with any role requirements to no be displayed
+            if ($this->token->getToken() === null) {
+                if ($addRole !== null || $removeRole !== null) {
+                    $event->setSkipNode(true);
+                }
+                return;
+            }
 
             if ($addRole !== null) {
                 if (!$this->security->isGranted($addRole)) {

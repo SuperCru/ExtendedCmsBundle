@@ -25,6 +25,7 @@ services:
           arguments:
               - "@knp_menu.menu_provider"
               - "@security.authorization_checker"
+              - "@security.token_storage"
           tags:
               -   name: kernel.event_listener
                   event: cmf_menu.create_menu_item_from_node
