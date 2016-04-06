@@ -25,10 +25,14 @@ class SuperCruExtendedCmsExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
+        
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
-
+        
+        if ($container->hasParameter("cmf_media.persistence.phpcr.manager_name")) {
+            $loader->load("media.yml");
+        }
+        
         $container->setParameter('supercru.extenedcms.footer.site_path', $config['site_path']);
     }
 }
