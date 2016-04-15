@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "kmj/toolkitbundle": "1.2@dev"
+        "kmj/toolkitbundle": "1.2.*@dev"
     },
     "suggest": {
         "symfony-cmf/create-bundle": "^1.2"
