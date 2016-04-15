@@ -7,8 +7,9 @@
 namespace SuperCru\ExtendedCmsBundle\Twig;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
+use SuperCru\ExtendedCmsBundle\Document\Site;
 use Twig_Extension;
-use Twig_Function_Method;
+use Twig_SimpleFunction;
 
 /**
  * Description of FooterExtension
@@ -31,13 +32,13 @@ class FooterExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            "get_footer" => new Twig_Function_Method($this, 'getFooter'),
+            new Twig_SimpleFunction("get_footer", [$this, 'getFooter']),
         ];
     }
 
     public function getFooter()
     {
-        $site = $this->dm->find(\SuperCru\ExtendedCmsBundle\Document\Site::class, $this->sitePath);
+        $site = $this->dm->find(Site::class, $this->sitePath);
         return $site->getFooter();
     }
 

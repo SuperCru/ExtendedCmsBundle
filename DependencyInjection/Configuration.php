@@ -29,6 +29,9 @@ class Configuration implements ConfigurationInterface
                         ->cannotBeEmpty()
                         ->defaultValue("/cms/content/site")
                     ->end()
+                    ->booleanNode("use_bootstrap_container")
+                        ->defaultTrue()
+                    ->end()
                 ->end();
 
         return $treeBuilder;

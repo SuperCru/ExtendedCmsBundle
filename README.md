@@ -18,3 +18,12 @@ $bundles = array(
     // ...
 );
 </pre>
+
+2) Configuration
+----------------------------------
+
+<pre>
+    super_cru_extended_cms:
+        site_path: /cms/content/site #The default location of the site path used for the initializer
+        use_bootstrap_container: true #Configures the cmf container to use a better bootstrap compatible container instead
+</pre>

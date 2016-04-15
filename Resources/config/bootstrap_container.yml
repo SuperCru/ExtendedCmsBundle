@@ -1,0 +1,13 @@
+services:
+    cmf.block.container:
+        class: SuperCru\ExtendedCmsBundle\Block\BootstrapContainerBlockService
+        arguments:
+            - cmf.block.container
+            - "@templating"
+            - "@sonata.block.renderer"
+            - ""
+        tags:
+            - { name: sonata.block }
+    
+#    cmf.block.container:
+#        alias: supercru.extendedcms.block.bootstrapcontainer

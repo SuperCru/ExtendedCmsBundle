@@ -1,11 +1,11 @@
 services:
-    supercru_extendedcms.twig.extension.footer:
+    supercru.extendedcms.twig.extension.footer:
         class: SuperCru\ExtendedCmsBundle\Twig\FooterExtension
         arguments: ["@doctrine_phpcr.odm.document_manager", "%supercru.extenedcms.footer.site_path%"]
         tags:
             - { name: "twig.extension" }
 
-    supercru_extendedcms.listener.menu_node:
+    supercru.extendedcms.listener.menu_node:
           class: SuperCru\ExtendedCmsBundle\Listener\MenuNodeListener
           arguments:
               - "@knp_menu.menu_provider"
@@ -15,3 +15,4 @@ services:
               -   name: kernel.event_listener
                   event: cmf_menu.create_menu_item_from_node
                   method: onCreateMenuItemFromNode
+    

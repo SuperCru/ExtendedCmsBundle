@@ -33,6 +33,10 @@ class SuperCruExtendedCmsExtension extends Extension
             $loader->load("media.yml");
         }
         
+        if ($config['use_bootstrap_container'] !== false) {
+            $loader->load("bootstrap_container.yml");
+        }
+        
         $container->setParameter('supercru.extenedcms.footer.site_path', $config['site_path']);
     }
 }
