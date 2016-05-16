@@ -1,6 +1,6 @@
 {% block elfinder_id_widget %}
     {% if form.vars.data is null %}
-        {% set url = "no-photo.jpg" %}
+        {% set url = asset("/bundles/supercruextendedcms/images/no-image.png") %}
     {% else %} 
         {% set url = cmf_media_display_url(form.vars.sonata_admin.value, {"imagine_filter": "selection_thumbnail"}) %}
     {% endif %}
