@@ -8,6 +8,7 @@ namespace SuperCru\ExtendedCmsBundle\Form\Type;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use FM\ElfinderBundle\Form\Type\ElFinderType;
 use SuperCru\ExtendedCmsBundle\Form\DataTransformer\ElFinderIdTransformer;
+use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -53,7 +54,6 @@ class ElFinderIdType extends ElFinderType
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-        $resolver->setDefault("data_class", "Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image");
     }
 
     /**
