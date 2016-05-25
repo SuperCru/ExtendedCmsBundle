@@ -32,6 +32,22 @@ class Configuration implements ConfigurationInterface
                     ->booleanNode("use_bootstrap_container")
                         ->defaultTrue()
                     ->end()
+                    ->arrayNode("full_image_filters")
+                        ->prototype("array")
+                            ->children()
+                                ->scalarNode("filter")->end()
+                                ->scalarNode("name")->end()
+                            ->end()
+                        ->end()                    ->end()
+                    ->arrayNode("thumb_image_filters")
+                        ->prototype("array")
+                            ->children()
+                                ->scalarNode("filter")->end()
+                                ->scalarNode("name")->end()
+                            ->end()
+                        ->end()
+                    ->end()
+            
                 ->end();
 
         return $treeBuilder;

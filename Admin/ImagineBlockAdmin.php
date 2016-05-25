@@ -3,9 +3,16 @@
  * This file is part of the SuperCruExtendedCmsBundle
  * @copyright (c) 2015, SuperCru LLC
  */
+
 namespace SuperCru\ExtendedCmsBundle\Admin;
 
+use Sonata\AdminBundle\Form\FormMapper;
+use SuperCru\ExtendedCmsBundle\Form\Type\ElFinderIdType;
 use Symfony\Cmf\Bundle\BlockBundle\Admin\Imagine\ImagineBlockAdmin as BaseAdmin;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Sonata\DoctrinePHPCRAdminBundle\Form\Type\TreeManagerType;
 
 /**
  * Admin class for ImagineBlock
@@ -39,40 +46,51 @@ class ImagineBlockAdmin extends BaseAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(\Sonata\AdminBundle\Form\FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $formMapper)
     {
         if (null === $this->getParentFieldDescription()) {
             $formMapper
                 ->with('form.group_general')
                 ->add(
-                    'parentDocument', 'doctrine_phpcr_odm_tree', array('root_node' => $this->getRootPath(), 'choice_list' => array(), 'select_root_node' => true)
+                    'parentDocument', TreeManagerType::class, ['root_node' => $this->getRootPath(), 'choice_list' => [], 'select_root_node' => true]
                 )
-                ->add('name', 'text')
+                ->add('name', TextType::class)
                 ->end();
         }
 
+        $fullFilterConfig = $this->getConfigurationPool()->getContainer()->getParameter("supercru.extenedcms.full_image_filters");
+        $thumbFilterConfig = $this->getConfigurationPool()->getContainer()->getParameter("supercru.extenedcms.thumb_image_filters");
+        $fullFilterChoices = [];
+        $thumbFilterChoices = [];
+        
+        foreach ($fullFilterConfig as $choice) {
+            $fullFilterChoices[$choice['name']] = $choice['filter'];
+        }
+        
+        foreach ($thumbFilterConfig as $choice) {
+            $thumbFilterChoices[$choice['name']] = $choice['filter'];
+        }
+        
         $formMapper
             ->with('form.group_general')
-            ->add('label', 'text', array('required' => false))
-            ->add('linkUrl', 'text', array('required' => false))
-            ->add('thumbFilter', 'choice', [
+            ->add('label', TextType::class, ['required' => false])
+            ->add('linkUrl', TextType::class, ['required' => false])
+            ->add('thumbFilter', ChoiceType::class, [
                 "label" => "Thumbnail filter",
                 "required" => false,
                 "placeholder" => "No filter",
-                "choices" => [
-                    "gallery_thumbnail" => "Gallary Thumbnail",
-                ],
+                "choices_as_values" => true,
+                "choices" => $thumbFilterChoices,
             ])
-            ->add('fullFilter', 'choice', [
+            ->add('fullFilter', ChoiceType::class, [
                 "label" => "Full size filter",
                 "required" => false,
                 "placeholder" => "No filter",
-                "choices" => [
-                    "gallery_full" => "Full size",
-                ],
+                "choices_as_values" => true,
+                "choices" => $fullFilterChoices,
             ])
-            ->add('image', 'elfinder_id', ["required" => false, "instance" => "form", "enable" => true])
-            ->add('position', 'hidden', array('mapped' => false))
+            ->add('image', ElFinderIdType::class, ["required" => false, "instance" => "form", "enable" => true])
+            ->add('position', HiddenType::class, ['mapped' => false])
             ->end();
     }
 }

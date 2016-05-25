@@ -37,6 +37,8 @@ class SuperCruExtendedCmsExtension extends Extension
             $loader->load("bootstrap_container.yml");
         }
         
+        $container->setParameter("supercru.extenedcms.full_image_filters", $config['full_image_filters']);
+        $container->setParameter("supercru.extenedcms.thumb_image_filters",  $config['thumb_image_filters']);
         $container->setParameter('supercru.extenedcms.footer.site_path', $config['site_path']);
     }
 }
